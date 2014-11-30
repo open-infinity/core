@@ -22,15 +22,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Unit test for collection utility.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.2.0
  */
 public class CollectionUtilTests {
@@ -51,6 +50,41 @@ public class CollectionUtilTests {
 			}			
 		});
 		Assert.assertEquals(expected.size(), ACTUAL_SIZE_OF_THE_COLLECTION);
+		ACTUAL_SIZE_OF_THE_COLLECTION = 0;
+	}
+	
+	@Test
+	public void verifyCollectionCallbackFunctionalityWithTraverseObject() {
+		Collection<String> actual = new ArrayList<String>();
+		Collection<String> expected = new ArrayList<String>();
+		actual.add("foo");
+		actual.add("bar");
+		CollectionElementUtil.iterate(actual, expected, new TraverseObjectCollectionElementCallback<String, Collection<String>>() {
+			public void callback(String callbackObject, Collection<String> collection) {
+				System.out.println(callbackObject);	
+				collection.add(callbackObject);
+			}			
+		});
+		Assert.assertEquals(expected.size(), actual.size());
+		ACTUAL_SIZE_OF_THE_COLLECTION = 0;
+	}
+	
+	@Test
+	public void verifyCollectionCallbackFunctionalityWithTraverseObjectAndNullValues() {
+		Collection<String> actual = new ArrayList<String>();
+		Collection<String> expected = new ArrayList<String>();
+		expected.add("foo");
+		expected.add("bar");
+		expected.add(null);
+		expected.add(null);
+		CollectionElementUtil.iterate(expected, actual, new TraverseObjectCollectionElementCallback<String, Collection<String>>() {
+			public void callback(String callbackObject, Collection<String> collection) {
+				System.out.println(callbackObject);	
+				collection.add(callbackObject);
+			}			
+		});
+		// Notice null value injected to collection
+		Assert.assertEquals(expected.size(), actual.size() + 2);
 		ACTUAL_SIZE_OF_THE_COLLECTION = 0;
 	}
 	
@@ -112,6 +146,23 @@ public class CollectionUtilTests {
 			}			
 		});
 		Assert.assertEquals(expected.size(), ACTUAL_SIZE_OF_THE_MAP);
+		ACTUAL_SIZE_OF_THE_MAP = 0;
+	}
+	
+	@Test
+	public void verifyTraverseObjectMapCallbackFunctionality() {
+		Map<String, String> expected = new HashMap<String, String>();
+		expected.put("foo","me1");
+		expected.put("bar", "me2");
+		Collection<String> traverseCollection = new ArrayList<String>();
+		CollectionElementUtil.iterate(expected, traverseCollection, new TraverseObjectMapElementCallback<String, String, Collection<String>>() {
+			public void callback(String key, String value, Collection<String> traverseCollection) {
+				System.out.println(key + ":" + value);	
+				traverseCollection.add(value);
+				ACTUAL_SIZE_OF_THE_MAP++;
+			}			
+		});
+		Assert.assertEquals(expected.size(), traverseCollection.size());
 		ACTUAL_SIZE_OF_THE_MAP = 0;
 	}
 	

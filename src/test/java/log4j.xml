@@ -83,12 +83,11 @@
 		<level value="debug" />
 		<appender-ref ref="console" />
 	</logger>
-	<!-- Application logger -->
-	<!-- <logger name="org.openinfinity.core.aspect"> -->
-	<!-- <level value="warn" /> -->
-	<!-- <appender-ref ref="console" /> -->
-	<!-- </logger> -->
-	<!-- Root Logger -->
+	<logger name="org.springframework.validation">
+		<level value="debug" />
+		<appender-ref ref="console" />
+	</logger>
+
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="console" />

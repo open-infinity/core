@@ -1,5 +1,85 @@
 Open Infinity Core - a solution accelerator framework.
 
+v.2.0.0.RELEASE - New major release with the following content
+
+New features for release
+* ParallelServiceActivator bean for accessing services in parallel.
+* AsyncResultCallback interface for accessing asynchonorous results.
+* GenericCrudService*-interfaces for accessing services by parallel processing.
+* Loadable interface for accessing asynchronous responses.
+* CrudOperations provides standardized CRUD-operations for REST-interfaces.
+* CrudService provides standardized CRUD-operations to service-interfaces.
+* CollectionElementUtil and supporting interfaces for traverse objects.
+* TraverseObjectCollectionElementCallback interface for traverse objects using Collection-interface.
+* TraverseObjectMapElementCallback interface for traverse objects using Map-interface.
+* ValidationUtil for Java bean validations.
+* AbstractCoreException support for adding exception detail objects.
+
+Upgrades to Maven dependencies
+- Spring Framework upgrade to 3.2.11.RELEASE
+- Spring Security version upgrade to 3.2.5.RELEASE
+- Spring Batch Core version upgrade to 2.2.7.RELEASE
+- slf4j version upgrade to 1.7.7
+- Jackson version upgrade to 1.9.13
+- Hibernate validator version upgrade to 4.3.2.Final
+- Validation Util version upgrade to 1.1.0.Final
+- Joda time version upgrade to 2.5
+- Lombok version upgrade to 1.14.8
+- Jolokia version upgrade to 1.2.2
+- Commons lang version upgrade to 3.3.2
+- HDIV version upgrade to 2.1.8
+- Keyzcar version upgrade to 0.71g
+- Xstream version upgrade to 1.4.7
+- Commons codec version upgrade to 1.9
+- Commons JXPATH version upgrade to 1.3
+- Commons IO version upgrade to 2.4
+- Commons lang version upgrade to 2.6
+- RXJava version upgrade to 0.20.4
+		
+Packaging instructions
+
+Maven installation:
+Download configuration management tool (Maven 3) and install it (notice that Java Runtime 1.7 is needed):
+http://maven.apache.org/download.html
+
+Installing gryptography extensions:
+mkdir <your location>
+cd <your location>
+git clone https://code.google.com/p/keyczar/
+cd <your location>/keyczar/java/code/
+git checkout Java_release_0.71g
+mvn clean install
+cd target
+
+Signing public and private keys with Keyczar:
+
+Asymmetric cryptography extension
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar create --location=<your location>/security/asymmetric --name="Open Infinity" --purpose=crypt --asymmetric=rsa
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar addkey --location=<your location>/security/asymmetric --status=primary
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar pubkey --location=<your location>/security/asymmetric --destination=<your location>/security/pubkey
+
+Symmetric cryptography extension
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar create --location=<your location>/security/symmetric --name="Open Infinity" --purpose=crypt
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar addkey --location=<your location>/security/symmetric --name="Open Infinity" --status=primary
+
+Install Lombok:
+mkdir <lombok-directory>
+cd <lombok-directory>
+git clone https://github.com/awhitford/lombok.maven
+cd lombok.maven
+Use maven for compiling, testing, packaging lombok -plugin to local Maven repository with command:
+mvn clean install
+
+Install Open Infinity Core:
+mkdir <open-infinity-core>
+git clone https://github.com/ileinone/open-infinity
+cd <open-infinity-core>/releases/openinfinity-core/1.4.0
+vi src/test/resources/properties/crypto.properties (define paths to your local file system for asymmetric and symmetric keys)
+Use maven for compiling, testing, packaging and installing Open Infinity Core -component to local Maven repository with command:
+mvn clean lombok:delombok install
+
+____________________________________________________________________________________________________________________________________________________________
+
 v.1.5.1.RELEASE - Bug fixes with the following content
 
 Upgrades to Maven dependencies

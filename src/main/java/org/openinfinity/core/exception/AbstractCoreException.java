@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openinfinity.core.util.ExceptionUtil;
+
 /**
  * Base class for maintaining logging information and unique ids with different exception levels in the runtime. This class extends <code>java.lang.RuntimeException</code> exception.
  * 
@@ -133,9 +135,10 @@ public abstract class AbstractCoreException extends RuntimeException {
 	public void addExceptionLevelBasedUniqueId(ExceptionLevel exceptionLevel, String serviceSpecificUniqueId) {
 		if (exceptionLevelBasedUniqueErrorIds.containsKey(exceptionLevel)) {
 			Collection<String> uniqueIds = exceptionLevelBasedUniqueErrorIds.get(exceptionLevel);
-			if (uniqueIds.contains(serviceSpecificUniqueId)){
-				throw new SystemException(EXCEPTION_MESSAGE_SERVICE_SPECIFIC_ID_ALLREADY_EXISTS + serviceSpecificUniqueId);
-			}
+			// FIX: Object can contain several similar errors.
+			//if (uniqueIds.contains(serviceSpecificUniqueId)){
+				//throw new SystemException(EXCEPTION_MESSAGE_SERVICE_SPECIFIC_ID_ALLREADY_EXISTS + serviceSpecificUniqueId);
+			//}
 			uniqueIds.add(serviceSpecificUniqueId);
 		} else {
 			Collection<String> uniqueIds = Collections.checkedCollection(new ArrayList<String>(), String.class);
@@ -144,12 +147,12 @@ public abstract class AbstractCoreException extends RuntimeException {
 		}
 	}
 	
-//	public <T extends Object> void addExceptionLevelBasedUniqueId(T domain, ExceptionLevel exceptionLevel, String serviceSpecificUniqueId) {
-//		ExceptionDetails<T> exceptionDetail = new ExceptionDetails<T>(domain);
-//		exceptionDetail.addExceptionLevelBasedUniqueId(domain, exceptionLevel, serviceSpecificUniqueId);
-//		exceptionDetailsCollection.add(exceptionDetail);
-//	}
-//	
+	public <T extends Object> void addExceptionLevelBasedUniqueId(T domain, ExceptionLevel exceptionLevel, String serviceSpecificUniqueId) {
+		ExceptionDetails<T> exceptionDetail = new ExceptionDetails<T>(domain);
+		exceptionDetail.addExceptionLevelBasedUniqueId(domain, exceptionLevel, serviceSpecificUniqueId);
+		exceptionDetailsCollection.add(exceptionDetail);
+	}
+	
 //	public <T extends Object> void addExceptionDetails(ExceptionDetails<T> exceptionDetails) {
 //		exceptionDetailsCollection.add(exceptionDetails);
 //	}
@@ -242,25 +245,43 @@ public abstract class AbstractCoreException extends RuntimeException {
 		}
 	}
 
-//	public Collection<ExceptionDetails<?>> getExceptionDetails() {
-//		return exceptionDetailsCollection;
-//	}
-//
-//	public void addExceptionDetails(ExceptionDetails<?> exceptionDetailsElement) throws SystemException {
-//		if (exceptionDetailsCollection.contains(exceptionDetailsElement)) {
-//			//ExceptionUtil.throwSystemException("ExceptionDetails allready exists: " + exceptionDetailsElement.toString());
-//		}
-//		this.exceptionDetailsCollection.add(exceptionDetailsElement);
-//	}
-//	
-//	public <Domain extends Object> ExceptionDetails<Domain> getExceptionDetails(Domain domain) {
-//		for (ExceptionDetails<?> exceptionDetailsWithDomain : exceptionDetailsCollection) {
-//			if (exceptionDetailsWithDomain.getDomain().equals(domain)) {
-//				return (ExceptionDetails<Domain>) exceptionDetailsWithDomain;
-//			}
-//		}
-//		throw new SystemException("There are no domain specific error messages: " + domain.toString());
-//	}
+	/**
+	 * Returns all exception details objects.
+	 * 
+	 * @return Collection of exception details.
+	 */
+	public Collection<ExceptionDetails<?>> getExceptionDetails() {
+		return exceptionDetailsCollection;
+	}
+
+	/**
+	 * Adds details to exception.
+	 * 
+	 * @param exceptionDetailsElement
+	 * @throws SystemException
+	 */
+	public void addExceptionDetails(ExceptionDetails<?> exceptionDetailsElement) throws SystemException {
+		if (exceptionDetailsCollection.contains(exceptionDetailsElement)) {
+			ExceptionUtil.throwSystemException("ExceptionDetails allready exists: " + exceptionDetailsElement.toString());
+		}
+		this.exceptionDetailsCollection.add(exceptionDetailsElement);
+	}
+	
+	/**
+	 * Several domain objects can contain several exception messges. Method returns collection of domain objects.
+	 * 
+	 * @param domain
+	 * @return
+	 */
+	public <Domain extends Object> ExceptionDetails<Domain> getExceptionDetailsOnObject(Domain domain) {
+		for (ExceptionDetails<?> exceptionDetailsWithDomain : exceptionDetailsCollection) {
+			if (exceptionDetailsWithDomain.getDomain().equals(domain)) {
+				return (ExceptionDetails<Domain>) exceptionDetailsWithDomain;
+			}
+		}
+		throw new SystemException("There are no domain specific error messages: " + domain.toString());
+	}
+	
 //	
 //	/**
 //	 * Each exception inherited from <code>org.openinfinity.core.exception.AbstractCoreException</code> must override addAllExceptionLevelMessages method.
@@ -292,11 +313,14 @@ public abstract class AbstractCoreException extends RuntimeException {
 //		}
 //	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((exceptionDetailsCollection == null) ? 0
+						: exceptionDetailsCollection.hashCode());
 		result = prime
 				* result
 				+ ((exceptionLevelBasedUniqueErrorIds == null) ? 0
@@ -314,6 +338,12 @@ public abstract class AbstractCoreException extends RuntimeException {
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractCoreException other = (AbstractCoreException) obj;
+		if (exceptionDetailsCollection == null) {
+			if (other.exceptionDetailsCollection != null)
+				return false;
+		} else if (!exceptionDetailsCollection
+				.equals(other.exceptionDetailsCollection))
+			return false;
 		if (exceptionLevelBasedUniqueErrorIds == null) {
 			if (other.exceptionLevelBasedUniqueErrorIds != null)
 				return false;
@@ -324,7 +354,5 @@ public abstract class AbstractCoreException extends RuntimeException {
 			return false;
 		return true;
 	}
-
-	
 	
 }

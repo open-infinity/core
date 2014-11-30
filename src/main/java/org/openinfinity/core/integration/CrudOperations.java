@@ -19,10 +19,10 @@ package org.openinfinity.core.integration;
  * Standardized URL paths for create, read, update, and delete operations.
  * 
  * @author Ilkka Leinonen
- * @version 1.1.0
- * @since 1.1.0
+ * @version 1.2.0 - Refactoring of the operations
+ * @since 1.1.0 - Initial version
  */
-public class CRUDOperations {
+public class CrudOperations {
 	
 	/**
 	 * Standardized URL path for CREATE operations.
@@ -42,11 +42,16 @@ public class CRUDOperations {
 	/**
 	 * Standardized URL path for LOAD BY ID operations. Uses resource ID as a path variable.
 	 */
-	public static final String LOAD_BY_ID = "/loadbyid/{id}";
+	public static final String QUERY_BY_ID = "/querybyid/{id}";
 	
 	/**
-	 * Standardized URL path for LOAD ALL operations.
+	 * Standardized URL path for QUERY ALL operations.
 	 */
-	public static final String LOAD_ALL = "/loadall";
+	public static final String QUERY_ALL = "/queryall";
 
+	/**
+	 * Standardized URL path for query operations (?key=value).
+	 */
+	public static final String QUERY_BY_CRITERIA = "/query";
+	
 }

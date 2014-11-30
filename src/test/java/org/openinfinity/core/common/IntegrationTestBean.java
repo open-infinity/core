@@ -20,6 +20,11 @@ import static org.openinfinity.core.aspect.ArgumentStrategy.CUSTOM;
 import static org.openinfinity.core.aspect.ArgumentStrategy.NONE;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -33,7 +38,9 @@ import org.openinfinity.core.annotation.Log;
 import org.openinfinity.core.annotation.MultiTenant;
 import org.openinfinity.core.aspect.ArgumentStrategy;
 import org.openinfinity.core.common.domain.Account;
+import org.openinfinity.core.exception.ExceptionLevel;
 import org.openinfinity.core.util.ExceptionUtil;
+import org.openinfinity.core.util.ValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +52,7 @@ import org.springframework.stereotype.Service;
  * Integration test Spring bean.
  * 
  * @author Ilkka Leinonen
- * @version 1.3.0
+ * @version 2.0.0
  * @since 1.0.0
  */
 @Component
@@ -59,6 +66,9 @@ public class IntegrationTestBean implements IntegrationTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IntegrationTestBean.class);
 	
 	public static final String FALSE_FIELD = "asdfasdfasdf";
+	
+	@Autowired
+	private ValidationUtil validationUtil;
 	
 	@Autowired
 	private Validator validator;
@@ -131,6 +141,11 @@ public class IntegrationTestBean implements IntegrationTest {
 		return failures.isEmpty() ? true : false;
 	}
 
+	@Log
+	public void validateMeAndThrowApplicationException(Account account) {
+		validationUtil.throwApplicationExceptionOnFailure(account, ExceptionLevel.WARNING);
+	}
+	
 	@Encrypt(argumentStrategy = ArgumentStrategy.ALL)
 	public Account encryptMe(Account account) {
 		LOGGER.debug("Account: " + account.toString());
@@ -156,8 +171,59 @@ public class IntegrationTestBean implements IntegrationTest {
 	}
 
 	@MultiTenant
+	@Log
 	public Account addMeTenantId(Account account) {
 		return account;
+	}
+
+	@Log
+	@Override
+	public Account update(Account type) {
+		return type;
+	}
+
+	private Account populateAccount() {
+		Account account = new Account("testname", "testaddress");
+		account.setCreationDate(new Date());
+		account.setTerminationDate(new Date());
+		return account;
+	}
+
+	@Log
+	@Override
+	public void delete(String id) {
+	}
+
+	@Log
+	@Override
+	public <K, V> Collection<Account> queryByCriteria(Map<K, V> parameters) {
+		Account account = populateAccount();
+		List<Account> accounts = new ArrayList<Account>();
+		accounts.add(account);
+		return accounts;
+	}
+
+	@Log
+	@Override
+	public String create(Account type) {
+		return "1";
+	}
+
+	@Log
+	@Override
+	public Account queryById(String id) {
+		Account account = populateAccount();
+		account.setId(id);
+		return account;
+	}
+
+	@Log
+	@Override
+	public Collection<Account> queryAllById(String id) {
+		Account account = populateAccount();
+		List<Account> accounts = new ArrayList<Account>();
+		accounts.add(account);
+		return accounts;
 	}
 	
 }

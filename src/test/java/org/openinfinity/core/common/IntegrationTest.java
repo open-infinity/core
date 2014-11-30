@@ -16,15 +16,16 @@
 package org.openinfinity.core.common;
 
 import org.openinfinity.core.common.domain.Account;
+import org.openinfinity.core.integration.CrudService;
 
 /**
  * Integration test Spring bean interface.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
+ * @version 2.0.0
  * @since 1.0.0
  */
-public interface IntegrationTest {
+public interface IntegrationTest extends CrudService<Account, String> {
 
 	public boolean log();
 	
@@ -65,6 +66,8 @@ public interface IntegrationTest {
 	public void throwUnknownException();
 	
 	public boolean validateMe(Account account);
+	
+	public void validateMeAndThrowApplicationException(Account account);
 	
 	public Account addMeTenantId(Account account);
 	
