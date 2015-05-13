@@ -6,7 +6,7 @@ Upgrades to Maven dependencies
 - Spring Framework upgrade to 4.1.6.RELEASE
 - Spring Security version upgrade to 4.0.1.RELEASE
 - Spring Batch Core version upgrade to 3.0.3.RELEASE
-- slf4j version upgrade to 1.7.7
+- slf4j version upgrade to 1.7.12
 - Jackson version upgrade to 1.9.13
 - Hibernate validator version upgrade to 4.3.2.Final
 - Validation Util version upgrade to 1.1.0.Final
@@ -14,15 +14,15 @@ Upgrades to Maven dependencies
 - Lombok version upgrade to 1.14.8
 - Jolokia version upgrade to 1.2.2
 - Commons lang version upgrade to 3.3.2
-- HDIV version upgrade to 2.1.8
+- HDIV version upgrade to 2.1.10
 - Keyzcar version upgrade to 0.71g
 - Xstream version upgrade to 1.4.7
 - Commons codec version upgrade to 1.9
 - Commons JXPATH version upgrade to 1.3
-- Commons IO version upgrade to 2.4
 - Commons lang version upgrade to 2.6
 - RXJava version upgrade to 0.20.4
-		
+- Commons IO version upgrade to 2.4
+	
 Packaging instructions
 
 Maven installation:

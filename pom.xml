@@ -15,24 +15,24 @@
 		<spring.batch.core.version>3.0.3.RELEASE</spring.batch.core.version>
 		<jbehave.version>3.9.5</jbehave.version>
 		<jbehave.web.selenium.version>3.5.5</jbehave.web.selenium.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<jackson.version>1.9.13</jackson.version>
 		<hibernate.validator.version>4.3.2.Final</hibernate.validator.version>
 		<validation.api.version>1.0.0.GA</validation.api.version>
-		<joda.time.version>2.5</joda.time.version>
-		<lombok.version>1.14.8</lombok.version>
-		<jolokia.version>1.2.2</jolokia.version>
-		<commons.lang.version>3.3.2</commons.lang.version>
+		<joda.time.version>2.7</joda.time.version>
+		<lombok.version>1.16.4</lombok.version>
+		<jolokia.version>1.3.0</jolokia.version>
+		<commons.lang.version>3.4</commons.lang.version>
 		<hdiv.version>2.1.10</hdiv.version>
 		<keyczar.version>0.71g</keyczar.version>
-		<xstream.version>1.4.7</xstream.version>
-		<commons.codec.version>1.9</commons.codec.version>
+		<xstream.version>1.4.8</xstream.version>
+		<commons.codec.version>1.10</commons.codec.version>
 		<commons.jxpath.version>1.3</commons.jxpath.version>
 		<commons.io.version>2.4</commons.io.version>
 		<commons.lang.version>2.6</commons.lang.version>
-		<rxjava.version>0.20.4</rxjava.version>
+		<rxjava.version>0.20.7</rxjava.version>
 	</properties>
 	<dependencies>
 		<dependency>
