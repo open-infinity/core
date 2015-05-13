@@ -26,8 +26,8 @@ import org.openinfinity.core.annotation.NotScript;
  * Validator for form manipulation attempts like XSS attacks.
  * 
  * @author Ilkka Leinonen
- * @Version 1.0.0
- * @Since 1.0.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class NotScriptValidation implements ConstraintValidator<NotScript, String> {
 
