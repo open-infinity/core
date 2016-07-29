@@ -9,7 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-		<slf4j.version>1.7.12</slf4j.version>
+		<slf4j.version>1.7.21</slf4j.version>
 		<spring.maven.artifact.version>4.2.7.RELEASE</spring.maven.artifact.version>
 		<spring.security.version>4.0.4.RELEASE</spring.security.version>
 		<spring.batch.core.version>3.0.7.RELEASE</spring.batch.core.version>
@@ -126,6 +126,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
+    		<artifactId>jul-to-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
@@ -134,11 +139,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		<dependency>
-		    <groupId>ch.qos.logback</groupId>
-    		<artifactId>logback-classic</artifactId>
-    		<version>1.1.7</version>
-  		</dependency>
   		<dependency>
 		    <groupId>ch.qos.logback</groupId>
     		<artifactId>logback-core</artifactId>
