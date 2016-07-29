@@ -3,38 +3,38 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfinity</groupId>
 	<artifactId>open-infinity-core</artifactId>
-	<version>3.1.1.RELEASE</version>
+	<version>3.2.0.RELEASE</version>
 	<name>Open Infinity Core Latest snapshot</name>
 	<description>Core Asset Base for Open Infinity based software projects.</description>
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 		<slf4j.version>1.7.12</slf4j.version>
-		<spring.maven.artifact.version>4.1.8.RELEASE</spring.maven.artifact.version>
-		<spring.security.version>4.0.2.RELEASE</spring.security.version>
-		<spring.batch.core.version>3.0.5.RELEASE</spring.batch.core.version>
-		<jbehave.version>3.10</jbehave.version>
+		<spring.maven.artifact.version>4.2.7.RELEASE</spring.maven.artifact.version>
+		<spring.security.version>4.0.4.RELEASE</spring.security.version>
+		<spring.batch.core.version>3.0.7.RELEASE</spring.batch.core.version>
+		<jbehave.version>4.0.5</jbehave.version>
 		<jbehave.web.selenium.version>3.5.5</jbehave.web.selenium.version>
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
-		<hsqldb.version>1.8.0.10</hsqldb.version>
-		<jackson.version>1.9.13</jackson.version>
+		<hsqldb.version>2.3.4</hsqldb.version>
+		<jackson.version>2.6.7</jackson.version>
 		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
 		<validation.api.version>1.1.0.Final</validation.api.version>
-		<joda.time.version>2.8.2</joda.time.version>
+		<joda.time.version>2.9.4</joda.time.version>
 		<lombok.version>1.16.6</lombok.version>
-		<jolokia.version>1.3.2</jolokia.version>
+		<jolokia.version>1.3.3</jolokia.version>
 		<commons.lang.version>3.4</commons.lang.version>
-		<hdiv.version>2.1.12</hdiv.version>
+		<hdiv.version>3.2.0</hdiv.version>
 		<keyczar.version>0.71g</keyczar.version>
-		<xstream.version>1.4.8</xstream.version>
+		<xstream.version>1.4.9</xstream.version>
 		<commons.codec.version>1.10</commons.codec.version>
 		<commons.jxpath.version>1.3</commons.jxpath.version>
-		<commons.io.version>2.4</commons.io.version>
+		<commons.io.version>2.5</commons.io.version>
 		<commons.lang.version>2.6</commons.lang.version>
-		<rxjava.version>1.0.14</rxjava.version>
-		<el.validation.version>2.2.4</el.validation.version>
-		<jersey.bean.validation>2.22.1</jersey.bean.validation>
+		<rxjava.version>1.1.8</rxjava.version>
+		<el.validation.version>3.0.0</el.validation.version>
+		<jersey.bean.validation>2.23.1</jersey.bean.validation>
 		<jettison.version>1.3.7</jettison.version>
 		<cglib.version>2.2</cglib.version>
 		<aspectjweaver.version>1.6.8</aspectjweaver.version>
@@ -234,23 +234,18 @@
 		</dependency>
 		<!-- JSON libraries -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-xc</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 		<!-- Web security libraries -->
