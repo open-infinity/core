@@ -40,6 +40,7 @@
 		<aspectjweaver.version>1.6.8</aspectjweaver.version>
 		<aspectjrt.version>1.6.8</aspectjrt.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<logback.version>1.1.7</logback.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -117,6 +118,7 @@
 			<artifactId>xstream</artifactId>
 			<version>${xstream.version}</version>
 		</dependency>
+		<!-- Logging dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -132,6 +134,16 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+    		<artifactId>logback-classic</artifactId>
+    		<version>1.1.7</version>
+  		</dependency>
+  		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+    		<artifactId>logback-core</artifactId>
+    		<version>1.1.7</version>
+  		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>

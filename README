@@ -3,6 +3,7 @@ Open Infinity Core - a solution accelerator framework.
 v.3.2.0.RELEASE - New minor release with the following content
 
 Upgrades to Maven dependencies
+- Logback version to 1.1.7
 - Spring Framework upgrade to 4.2.7.RELEASE
 - Spring Security version upgrade to 4.0.4.RELEASE
 - Spring Batch Core version upgrade to 3.0.7.RELEASE
